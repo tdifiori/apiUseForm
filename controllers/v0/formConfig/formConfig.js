@@ -2,7 +2,7 @@
 const { validationResult } = require('express-validator'); 
 
 //Model 
-const formModel = require('../../../models/form/form');
+const formConfigModel = require('../../../models/form/formConfig');
 
 
 /* exports.getFormConfig = async(req, res) => {
@@ -29,7 +29,13 @@ const formModel = require('../../../models/form/form');
 
 exports.createFormConfig = async(req, res) => {
 
-    const config = req.body.config;
+    const configCreate = new formConfigModel({
+        config: req.body.config
+    });
+    
+    
+    
+    
 
      const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -42,11 +48,21 @@ exports.createFormConfig = async(req, res) => {
 
     try {
         if(req){
-            return res.status(200).json({
-                status: true,
-                message: 'Success Dato recuperato correttamente',
-                dataBody: config
-            });
+
+            configCreate.save().then((response => {
+                return res.status(201).json({
+                    status: true,
+                    message: 'Success Dato creato correttamente',
+                    response
+                });
+
+            })).catch( error => {
+                return res.status(422).json({
+                    status: false,
+                    messageError: error
+                });
+            })
+
         }
 
       
