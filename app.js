@@ -3,6 +3,8 @@ const helmet = require('helmet');
 const cors = require("cors");
 //const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const dbInit = require('./utils/mongoDb');
+//const mongoConnect = require('./utils/mongoDb')
 const app = express();
 const router = express.Router();
 
@@ -13,6 +15,7 @@ app.use(express.json());
 app.use(helmet({ hidePoweredBy: { setTo: 'UseForm - xxxxxxxx' } }));
 
 
+
 const env = process.env.NODE_ENV;
 
 app.use(express.static('public'));
@@ -20,32 +23,45 @@ app.use(express.static('public'));
 
 app.use('/', router);
 
-//app.use(express.static('apidocs'));
 
 require('./routes')(app);
 
 
-  // const  dbPath = "mongodb+srv://useformadmin:IlIFHAD87SeHLLW6@cluster0.mwuyn.mongodb.net/useform?retryWrites=true&w=majority";
-   const  dbPathLocal = 'mongodb://localhost:27017/useform';
-
-
-
-// ***************  NIENTE SI CONNETTE SOLO IN LOCALE PER ORA !!!! ********************************
+// ***************  NIENTE..! SI CONNETTE SOLO IN LOCALE PER ORA !!!! ********************************
 //************************************************************************************************ 
-
-     mongoose.connect(dbPathLocal,  { useNewUrlParser: true , useUnifiedTopology: true}).then( resp => {
-        if(resp){
-            app.listen(process.env.PORT, function() {
-                console.log('server in ascolto su porta ' + process.env.PORT);             
-            })
-        }     
-    }).catch(err => console.log(err)); 
  
+// meglio usare i driver direttamente di mongo.. seguire le guide di \Gianluca Scocozza\ 
+//  https://www.youtube.com/watch?v=FKo5fPV2Dgg
+//https://www.youtube.com/watch?v=iWCFdJMACas&t=312s
+//-----------------------------------------------------------------------------------------
 
 
-/*  app.listen(process.env.PORT, function() {
-    console.log('server in ascolto su porta ' + process.env.PORT);
+/* async function run() {
+    await mongoConnect();
+        app.listen(process.env.PORT, function() {
+            console.log('Server in ascolto su porta: ' + process.env.PORT);             
+        })
+}  
+run().catch(err => console.log('errorr connection mongo: '+ err));
+ */
+
+
+/* dbInit().then(  () => {
+     app.listen(process.env.PORT, function() {
+        console.log('Server in ascolto su porta: ' + process.env.PORT);             
+    });
 }); */
+ dbInit()
+
+    app.listen(process.env.PORT, function() {
+       console.log('Server in ascolto su porta: ' + process.env.PORT);             
+   });
+
+
+
+
+
+
 
 
 

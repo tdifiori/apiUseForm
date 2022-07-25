@@ -5,6 +5,8 @@ const { validationResult } = require('express-validator');
 const formConfigModel = require('../../../models/form/formConfig');
 
 
+
+
 /* exports.getFormConfig = async(req, res) => {
 
     try {
@@ -29,12 +31,14 @@ const formConfigModel = require('../../../models/form/formConfig');
 
 exports.createFormConfig = async(req, res) => {
 
-    const configCreate = new formConfigModel({
+/*     const configCreate = new formConfigModel({
         config: req.body.config
-    });
+    }); */
     
     
-    
+    const configCreate = {
+        config: req.body.config
+    };
     
 
      const errors = validationResult(req);
