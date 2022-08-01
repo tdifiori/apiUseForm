@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const  Schema = mongoose.Schema;
 
-
     const FormConfigSchema = new Schema({
             config : {
                 type : Object,
@@ -9,8 +8,5 @@ const  Schema = mongoose.Schema;
             }
         });
 
-
-
-
-module.exports = mongoose.model('FormConfig', FormConfigSchema);
+module.exports = mongoose.model('Form_Config', FormConfigSchema);
 

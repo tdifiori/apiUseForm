@@ -1,32 +1,28 @@
-
 const { validationResult } = require('express-validator');
-const  FormModelConfig  = require('../../../models/form/formsConfig'); 
+const  userModel  = require('../../../models/auth/user'); 
 
-/* exports.getFormConfig = async(req, res) => {
 
-    try {
-        console.log("response!");
-        return res.status(200).json({
-            status: true,
-            message: 'Success Dato recuperato correttamente',
-        });
-      
-        
-    } catch (error) {
-        return res.status(422).json({
-            status: false,
-            messageError: error
-        });
+exports.getlogin = async(req, res) => {
+
+/* const newUtente = new userModel(
+    {
+        user: "tizio", 
+        email: "tizio@hmail.com", 
+        password: "123434@!TT"
     }
+);
+newUtente.save(); */
 
 
-} */
 
+    return res.status(200).json({
+        status: true,
+        message: 'Success',
+        req: req.body
+    });
 
-exports.createFormConfig = async(req, res) => {
-
-
-     const configCreate = new FormModelConfig({
+/* 
+     const user = new FormModelConfig({
         config: req.body.config
     }); 
 
@@ -62,8 +58,7 @@ exports.createFormConfig = async(req, res) => {
             status: false,
             messageError: error
         });
-    }
+    } */
 
 
 }
-

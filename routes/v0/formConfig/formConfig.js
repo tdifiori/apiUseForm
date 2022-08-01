@@ -11,8 +11,6 @@ const { body } = require('express-validator');
 const formConfigController = require('../../../controllers/v0/formConfig/formConfig');
 
 
-
-
     //router.get('/config', formConfigController.getFormConfig);
 
     router.post('/create', [

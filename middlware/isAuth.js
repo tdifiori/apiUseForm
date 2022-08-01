@@ -22,9 +22,6 @@ module.exports = (req, res, next) => {
     try {
         decode = jwt.verify(token, process.env.JWT_KEY);
         req.jwt = decode;
-
-
-
     } catch (error) {
         return res.status(500).json({
             status: false,
